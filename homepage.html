@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="home.css" />
+  </head>
+  <body>
+    <div id="loading-screen" class="screen-disable">
+      <script src="https://cdn.lordicon.com/lordicon.js"></script>
+      <lord-icon
+        id="load-symbol"
+        src="https://cdn.lordicon.com/pwlnbxzy.json"
+        trigger="loop"
+        colors="primary:#ffffff,secondary:#e4e4e4"
+        style="width: 200px; height: 200px"
+      >
+      </lord-icon>
+    </div>
+
+    <div id="tool-sphere">
+      <script src="https://cdn.lordicon.com/lordicon.js"></script>
+      <lord-icon
+        src="https://cdn.lordicon.com/oqaajvyl.json"
+        trigger="hover"
+        colors="primary:#110a5c,secondary:#7166ee"
+        style="
+          width: 40px;
+          height: 40px;
+          padding-top: 3px;
+          padding-left: 3px;
+          padding-right: 3px;
+          padding-bottom: 3px;
+        "
+      >
+      </lord-icon>
+    </div>
+
+    <div id="tool-frame">
+      <div style="position: relative; height: 100%; width: 100%; display: flex">
+        <div id="themeBox">
+          <div
+            data-ch="twilight"
+            class="themeColors"
+            style="
+              background-image: linear-gradient(
+                to bottom,
+                rgba(51, 51, 102, 1),
+                rgba(102, 102, 204, 1),
+                rgba(255, 153, 204, 1),
+                rgba(255, 102, 102, 1)
+              );
+            "
+          ></div>
+          <div
+            data-ch="sunrise"
+            class="themeColors"
+            style="
+              background-image: linear-gradient(
+                to bottom,
+                rgba(255, 94, 98, 1),
+                rgba(255, 160, 122, 1),
+                rgba(255, 218, 185, 1),
+                rgba(255, 238, 173, 1)
+              );
+            "
+          ></div>
+          <div
+            data-ch="Ocean"
+            class="themeColors"
+            style="
+              background-image: linear-gradient(
+                to bottom,
+                rgba(0, 0, 51, 1),
+                rgba(0, 102, 153, 1),
+                rgba(102, 178, 255, 1),
+                rgba(179, 229, 252, 1)
+              );
+            "
+          ></div>
+          <br />
+          <div
+            data-ch="Leaf"
+            class="themeColors"
+            style="
+              background-image: linear-gradient(
+                to bottom,
+                rgb(11, 83, 11),
+                rgb(133, 205, 50),
+                rgb(199, 238, 144),
+                rgb(255, 255, 240)
+              );
+            "
+          ></div>
+          <div
+            data-ch="Haze"
+            class="themeColors"
+            style="
+              background-image: linear-gradient(
+                to bottom,
+                rgba(75, 0, 130, 1),
+                rgba(139, 0, 255, 1),
+                rgba(221, 160, 221, 1),
+                rgba(255, 240, 245, 1)
+              );
+            "
+          ></div>
+          <div
+            data-ch="Sky"
+            class="themeColors"
+            style="
+              background-image: linear-gradient(
+                to bottom,
+                rgba(0, 191, 255, 1),
+                rgba(135, 206, 250, 1),
+                rgba(173, 216, 230, 1),
+                rgba(224, 255, 255, 1)
+              );
+            "
+          ></div>
+        </div>
+        <div
+          class="tools"
+          style="
+            position: absolute;
+            height: 48px;
+            width: 48px;
+            background-color: rgb(0, 15, 56);
+            border-radius: 30px;
+            left: 220px;
+            top: 38px;
+            transition: all 0.5s ease;
+            cursor: pointer;
+          "
+        >
+          <img
+            title="Light mode"
+            class="tool-img"
+            id="darkMode"
+            style="
+              margin-left: 8px;
+              margin-top: 8px;
+              height: 65%;
+              width: 65%;
+              color: aliceblue;
+              filter: invert(100%);
+              transition: all 0.5s ease;
+            "
+            src="sun.png"
+          />
+        </div>
+        <div
+          class="tools"
+          style="
+            position: absolute;
+            height: 48px;
+            width: 48px;
+            background-color: rgb(0, 15, 56);
+            border-radius: 30px;
+            left: 130px;
+            top: 68px;
+            transition: all 0.5s ease;
+            cursor: pointer;
+          "
+        >
+          <img
+            title="Themes"
+            id="themeBtn"
+            class="tool-img"
+            style="
+              margin-left: 7px;
+              margin-top: 8px;
+              height: 70%;
+              width: 70%;
+              color: aliceblue;
+              filter: invert(100%);
+              transition: all 0.5s ease;
+            "
+            src="palette.png"
+          />
+        </div>
+        <div
+          class="tools"
+          style="
+            position: absolute;
+            height: 48px;
+            width: 48px;
+            background-color: rgb(0, 15, 56);
+            border-radius: 30px;
+            left: 75px;
+            top: 138px;
+            transition: all 0.5s ease;
+            cursor: pointer;
+          "
+        >
+          <img
+            title="Help desk"
+            class="tool-img"
+            style="
+              margin-left: 7px;
+              margin-top: 6px;
+              height: 70%;
+              width: 70%;
+              color: aliceblue;
+              filter: invert(100%);
+              transition: all 0.5s ease;
+            "
+            src="help.png"
+          />
+        </div>
+        <div
+          class="tools"
+          style="
+            position: absolute;
+            height: 48px;
+            width: 48px;
+            background-color: rgb(0, 15, 56);
+            border-radius: 30px;
+            left: 48px;
+            top: 220px;
+            cursor: pointer;
+            transition: all 0.5s ease;
+          "
+        >
+          <img
+            title="Take A Web Tour"
+            class="tool-img"
+            style="
+              margin-left: 9px;
+              margin-top: 9px;
+              height: 65%;
+              width: 65%;
+              color: aliceblue;
+              filter: invert(100%);
+              transition: all 0.5s ease;
+            "
+            src="web-tour.png"
+          />
+        </div>
+      </div>
+    </div>
+    <nav id="nav-Bar">
+      <ul>
+        <li class="title" id="desvio" style="font-family: cursive">Desvio</li>
+        <li class="space" style="width: 970px"></li>
+        <li id="home" style="color: rgb(255, 12, 12)">Home</li>
+        <li>Profile</li>
+        <li style="position: relative; width: 150px" id="eco-coins">
+          Eco-Coins<img
+            style="position: absolute"
+            id="eco"
+            src="eco-coin.png"
+          />
+        </li>
+      </ul>
+    </nav>
+
+    <center>
+      <div class="banner">
+        <img />
+      </div>
+      <h3 class="cat-title">Categories</h3>
+    </center>
+    <div
+      style="
+        display: flex;
+        overflow-x: auto;
+        overflow-x: hidden;
+        flex-wrap: nowrap;
+        justify-content: space-around;
+        height: 460px;
+        padding-top: 40px;
+      "
+    >
+      <div style="display: block; margin-left: 20px">
+        <div class="row cat-container-1">
+          <div class="category" data-ch="historic">
+            <img
+              style="width: 100%; height: 100%; object-fit: cover"
+              src="historic.jpg"
+            />
+            <div class="overlay">
+              <span class="overlay-text"><center>HISTORIC</center></span>
+            </div>
+          </div>
+          <div class="category" data-ch="nature">
+            <img
+              style="width: 100%; height: 100%; object-fit: cover"
+              src="nature.jpg"
+            />
+            <div class="overlay">
+              <span class="overlay-text"><center>NATURE</center></span>
+            </div>
+          </div>
+          <div class="category" data-ch="snow">
+            <img
+              style="width: 100%; height: 100%; object-fit: cover"
+              src="snow.jpg"
+            />
+            <div class="overlay">
+              <span class="overlay-text"><center>SNOW</center></span>
+            </div>
+          </div>
+          <div class="category" data-ch="beach">
+            <img
+              style="width: 100%; height: 100%; object-fit: cover"
+              src="beach.jpg"
+            />
+            <div class="overlay">
+              <span class="overlay-text"><center>BEACH</center></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="display: block">
+        <div class="row cat-container-2">
+          <div class="category" data-ch="wildlife">
+            <img
+              style="width: 100%; height: 100%; object-fit: cover"
+              src="wildlife.jpg"
+            />
+            <div class="overlay">
+              <span class="overlay-text"><center>WILDLIFE</center></span>
+            </div>
+          </div>
+          <div class="category" data-ch="cultural">
+            <img
+              style="width: 100%; height: 100%; object-fit: cover"
+              src="cultural.jpg"
+            />
+            <div class="overlay">
+              <span class="overlay-text"><center>CULTURAL</center></span>
+            </div>
+          </div>
+          <div class="category" data-ch="offcity">
+            <img
+              style="width: 100%; height: 100%; object-fit: cover"
+              src="offcity.jpg"
+            />
+            <div class="overlay">
+              <span class="overlay-text"><center>OFFCITY</center></span>
+            </div>
+          </div>
+          <div class="category" data-ch="adventure-sports">
+            <img
+              style="width: 100%; height: 100%; object-fit: cover"
+              src="adventure-sports.jpg"
+            />
+            <div class="overlay">
+              <span class="overlay-text" style="font-size: 50px"
+                ><center>ADVENTURE-SPORTS</center></span
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <p id="choose-travel-spot">Choose your travel spot:</p>
+      <br />
+
+      <img id="map-icon" src="map-icon-1.png " onclick="enterMap" />
+      <br /><br /><br />
+      <hr style="box-shadow: 0px 3px 8px rgb(111, 39, 255)" />
+      <p
+        id="src"
+        style="
+          font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+          font-style: italic;
+          font-size: 60px;
+          color: rgb(255, 224, 233);
+          margin-left: 15%;
+          display: block;
+          margin-bottom: 5px;
+        "
+      >
+        Source
+      </p>
+      <script src="https://cdn.lordicon.com/lordicon.js"></script>
+      <lord-icon
+        src="https://cdn.lordicon.com/oxbjzlrk.json"
+        trigger="loop"
+        colors="primary:#110a5c,secondary:#d1e3fa"
+        style="width: 120px; height: 120px; margin-left: 50%; margin-top: 0px"
+      >
+      </lord-icon>
+      <p
+        id="dest"
+        style="
+          font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+          font-style: italic;
+          font-size: 60px;
+          color: rgb(255, 224, 233);
+          margin-left: 75%;
+          display: block;
+          margin-top: 5px;
+        "
+      >
+        Destination
+      </p>
+      <hr style="box-shadow: 0px -3px 8px rgb(111, 39, 255)" />
+    </div>
+    <div
+      class="features"
+      style="
+        display: flex;
+        justify-content: space-between;
+        margin-top: 20px;
+        margin-left: 40px;
+        margin-right: 40px;
+      "
+    >
+      <div id="hotel" style="position: relative">
+        <script src="https://cdn.lordicon.com/lordicon.js"></script>
+        <lord-icon
+          src="https://cdn.lordicon.com/wtyzzeli.json"
+          trigger="hover"
+          colors="primary:#121331,secondary:#a39cf4,tertiary:#d1f3fa,quaternary:#f4f19c,quinary:#646e78"
+          style="width: 300px; height: 300px; cursor: pointer"
+        >
+        </lord-icon>
+        <center>
+          <h1>
+            Hotel <br />
+            Booking
+          </h1>
+        </center>
+      </div>
+      <div id="iternary" style="position: relative">
+        <script src="https://cdn.lordicon.com/lordicon.js"></script>
+        <lord-icon
+          src="https://cdn.lordicon.com/ujxzdfjx.json"
+          trigger="hover"
+          colors="primary:#121331,secondary:#d1e3fa"
+          style="
+            width: 260px;
+            height: 260px;
+            padding-left: 15px;
+            padding-top: 10px;
+            cursor: pointer;
+            margin-bottom: 30px;
+          "
+        >
+        </lord-icon>
+        <center>
+          <h1>
+            Generate <br />
+            Iternary
+          </h1>
+        </center>
+      </div>
+      <a href="ecom.html" target="_blank">
+        <div id="ecom" style="position: relative">
+          <script src="https://cdn.lordicon.com/lordicon.js"></script>
+          <lord-icon
+            src="https://cdn.lordicon.com/cosvjkbu.json"
+            trigger="hover"
+            colors="primary:#ebe6ef,secondary:#0a2e5c,tertiary:#3a3347"
+            style="width: 300px; height: 300px; cursor: pointer"
+          >
+          </lord-icon>
+          <center>
+            <h1 style="left: 100px">
+              Travel <br />
+              Store
+            </h1>
+          </center>
+        </div>
+      </a>
+    </div>
+
+    <section style="height: 1000px"></section>
+
+    <script src="https://cdn.lordicon.com/lordicon.js"></script>
+    <div class="cat-arrow-front">
+      <lord-icon
+        src="https://cdn.lordicon.com/vduvxizq.json"
+        trigger="hover"
+        colors="primary:#d1e3fa"
+        style="width: 80px; height: 80px"
+      >
+      </lord-icon>
+    </div>
+    <div class="cat-arrow-back">
+      <lord-icon
+        src="https://cdn.lordicon.com/vduvxizq.json"
+        trigger="hover"
+        colors="primary:#d1e3fa"
+        style="width: 80px; height: 80px"
+      >
+      </lord-icon>
+    </div>
+
+    <script src="home.js"></script>
+    <script src="homedb.js"></script>
+  </body>
+</html>

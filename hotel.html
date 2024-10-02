@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hotel Booking</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #d6f4ffbe;
+        padding: 20px;
+      }
+      form {
+        margin-bottom: 20px;
+      }
+      input {
+        margin: 5px;
+        padding: 10px;
+        font-size: 16px;
+      }
+      .hotel-results {
+        margin-top: 20px;
+      }
+      .hotel-card {
+        background-color: white;
+        padding: 15px;
+        margin-bottom: 10px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      #hotel-title {
+        font-family: Georgia, "Times New Roman", Times, serif;
+        color: rgb(0, 100, 100);
+        font-size: 60px;
+        font-weight: 300;
+        font-style: italic;
+      }
+      #hotel-btn {
+        font-family: "Courier New", Courier, monospace;
+        font-size: 17px;
+        width: 150px;
+        height: 50px;
+        border-radius: 10%;
+        background-color: rgb(255, 192, 169);
+        font-weight: 550;
+        transition: all 0.2s ease;
+      }
+      .hotel-card {
+        background-color: rgba(255, 224, 213, 0.744);
+      }
+    </style>
+  </head>
+  <body>
+    <h1 id="hotel-title"><center>Hotel Booking</center></h1>
+    <hr style="box-shadow: 0px 0px 8px rgb(22, 72, 72)" />
+
+    <form id="locationForm" style="margin-top: 40px; margin-left: 250px">
+      <label for="latitude" style="margin-left: 30px">Latitude:</label>
+      <input type="text" id="latitude" placeholder="Enter latitude" required />
+
+      <label for="longitude" style="margin-left: 30px">Longitude:</label>
+      <input
+        type="text"
+        id="longitude"
+        placeholder="Enter longitude"
+        required
+      />
+
+      <button type="submit" id="hotel-btn" style="margin-left: 30px">
+        Search Hotels
+      </button>
+    </form>
+
+    <div id="hotelResults" class="hotel-results"></div>
+
+    <script>
+      const hotelBtn = document.getElementById("hotel-btn");
+      hotelBtn.addEventListener("mouseenter", function () {
+        hotelBtn.style.backgroundColor = "coral";
+        hotelBtn.style.cursor = "pointer";
+      });
+      hotelBtn.addEventListener("mouseleave", function () {
+        hotelBtn.style.backgroundColor = "rgb(255, 192, 169)";
+      });
+      document
+        .getElementById("locationForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          const latitude = document.getElementById("latitude").value;
+          const longitude = document.getElementById("longitude").value;
+
+          // Clear previous results
+          document.getElementById("hotelResults").innerHTML = "";
+
+          // Fetch hotel data from OpenTripMap API
+          fetch(
+            `https://api.opentripmap.com/0.1/en/places/radius?radius=5000&lon=${longitude}&lat=${latitude}&kinds=accomodations&apikey=5ae2e3f221c38a28845f05b60d399e5b1ff416ba7e0db89eed915691`
+          )
+            .then((response) => response.json())
+            .then((data) => {
+              if (data.features && data.features.length > 0) {
+                displayHotels(data.features, latitude, longitude);
+              } else {
+                document.getElementById("hotelResults").innerHTML =
+                  "<p>No hotels found for this location.</p>";
+              }
+            })
+            .catch((error) => {
+              console.error("Error fetching hotel data:", error);
+              document.getElementById("hotelResults").innerHTML =
+                "<p>Failed to fetch hotel data. Please try again later.</p>";
+            });
+        });
+
+      function displayHotels(hotels, latitude, longitude) {
+        const hotelResults = document.getElementById("hotelResults");
+
+        hotels.forEach((hotel) => {
+          const hotelCard = document.createElement("div");
+          hotelCard.classList.add("hotel-card");
+
+          const hotelName = hotel.properties.name || "Unnamed Hotel";
+          const hotelLocation = `(${hotel.geometry.coordinates[1]}, ${hotel.geometry.coordinates[0]})`;
+
+          // Display the basic hotel info
+          hotelCard.innerHTML = `
+      <h3>${hotelName}</h3>
+      <p>Location: ${hotelLocation}</p>
+      <a href="https://www.google.com/maps/search/?api=1&query=${hotel.geometry.coordinates[1]},${hotel.geometry.coordinates[0]}" target="_blank">View on Map</a>
+      <div id="${hotel.properties.id}-details" class="hotel-details"></div>
+    `;
+
+          hotelResults.appendChild(hotelCard);
+
+          // Fetch hotel pricing details from Amadeus API
+          fetchHotelPricing(
+            hotel.geometry.coordinates[1],
+            hotel.geometry.coordinates[0],
+            hotel.properties.id
+          );
+        });
+      }
+
+      function fetchHotelPricing(lat, lon, hotelId) {
+        fetch(
+          `https://test.api.amadeus.com/v2/shopping/hotel-offers?latitude=${lat}&longitude=${lon}&apikey=aVVFAYztOa5SA9wvD40rE25Y8un6efas`
+        )
+          .then((response) => response.json())
+          .then((data) => {
+            const hotelDetailsDiv = document.getElementById(
+              `${hotelId}-details`
+            );
+
+            if (data.data && data.data.length > 0) {
+              const pricingInfo = data.data[0]; // Assuming you want the first hotel for simplicity
+
+              hotelDetailsDiv.innerHTML = `
+          <p><strong>Price:</strong> ${pricingInfo.offers[0].price.total} ${
+                pricingInfo.offers[0].price.currency
+              }</p>
+          <p><strong>Rating:</strong> ${pricingInfo.rating || "N/A"}</p>
+          <p><strong>Amenities:</strong> ${
+            pricingInfo.amenities.join(", ") || "N/A"
+          }</p>
+        `;
+            } else {
+              hotelDetailsDiv.innerHTML = "<p>No pricing info available.</p>";
+            }
+          })
+          .catch((error) => {
+            console.error("Error fetching pricing data:", error);
+            const hotelDetailsDiv = document.getElementById(
+              `${hotelId}-details`
+            );
+            hotelDetailsDiv.innerHTML = "<p>Failed to fetch pricing data.</p>";
+          });
+      }
+    </script>
+  </body>
+</html>

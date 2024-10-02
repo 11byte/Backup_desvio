@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Evocoins - Upload Certificate</title>
+    <style>
+      body {
+        font-family: "Arial", sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #1c1c28; /* Dark background */
+        color: #e0e0e0; /* Light text color */
+        padding-top: 65px;
+      }
+
+      .header {
+        background: linear-gradient(
+          to right,
+          #21252b,
+          #34495e
+        ); /* Dark, but lighter than body */
+        color: #ffffff;
+        padding: 40px 20px;
+        text-align: center;
+        font-size: 36px;
+        font-weight: bold;
+        letter-spacing: 1px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      }
+
+      .intro-section {
+        padding: 30px;
+        background-color: #292b38; /* Slightly lighter section */
+        color: #e0e0e0;
+        text-align: center;
+        margin: 20px auto;
+        font-size: 18px;
+        line-height: 1.8;
+        max-width: 800px;
+        border-radius: 10px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+      }
+
+      .intro-section strong {
+        color: #00b894; /* Green accent for important words */
+      }
+
+      .content {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 50vh;
+        flex-direction: column;
+        margin-bottom: 50px;
+      }
+
+      .upload-box {
+        background-color: #2e313e; /* Lighter dark box */
+        padding: 40px;
+        border-radius: 10px;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+        text-align: center;
+        width: 400px;
+        margin-top: 20px;
+      }
+
+      .upload-box h2 {
+        margin-bottom: 20px;
+        color: #00b894; /* Accent color */
+        font-size: 24px;
+      }
+
+      .upload-box input[type="file"] {
+        display: none;
+      }
+
+      .custom-file-upload {
+        display: inline-block;
+        padding: 12px 30px;
+        cursor: pointer;
+        color: white;
+        background-color: #00b894; /* Vibrant button */
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+      }
+
+      .custom-file-upload:hover {
+        background-color: #00a383;
+      }
+
+      .wallpaper-box {
+        margin-top: 20px;
+      }
+
+      .wallpaper-box input {
+        width: 100%;
+        padding: 12px;
+        border: 2px solid #00b894;
+        border-radius: 5px;
+        margin-bottom: 20px;
+        background-color: #1c1f27;
+        color: #ffffff;
+      }
+
+      .footer {
+        text-align: center;
+        padding: 20px;
+        background-color: #21252b;
+        color: #e0e0e0;
+      }
+
+      /* Evo Coins Box */
+      .coins-box {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 30px 0;
+      }
+
+      .coin-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 15px;
+        border: 2px solid #00b894;
+        border-radius: 10px;
+        background-color: #292b38;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+        position: relative;
+        width: 200px;
+        perspective: 1000px;
+      }
+
+      .coin {
+        background: radial-gradient(circle, #ffd700 30%, #e6ac00);
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        position: absolute;
+        bottom: 10px;
+        left: 50%;
+        transform: translateX(-50%) rotateX(60deg);
+        box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.5),
+          inset -4px -4px 10px rgba(255, 255, 255, 0.3);
+        animation: bounce 1.5s infinite alternate, spin 2s infinite linear;
+      }
+
+      .coin-symbol {
+        display: flex;
+        align-items: center;
+        font-size: 22px;
+        font-weight: bold;
+        color: #00b894;
+      }
+
+      .coin-symbol img {
+        width: 35px;
+        margin-right: 10px;
+      }
+
+      .coins-number {
+        font-size: 28px;
+        color: #ffd700; /* Gold for the coin count */
+        font-weight: bold;
+        margin-left: 10px;
+      }
+
+      /* Animations */
+      @keyframes bounce {
+        0% {
+          bottom: 10px;
+          opacity: 0.8;
+        }
+        100% {
+          bottom: 70px;
+          opacity: 1;
+        }
+      }
+
+      @keyframes spin {
+        0% {
+          transform: translateX(-50%) rotateX(60deg) rotateY(0deg);
+        }
+        100% {
+          transform: translateX(-50%) rotateX(60deg) rotateY(360deg);
+        }
+      }
+      nav {
+        margin-left: 5px;
+        z-index: 100;
+        background: rgba(255, 255, 255, 0.25);
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(7px);
+        border-radius: 10px;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        color: aliceblue;
+        position: fixed;
+        top: 0;
+      }
+      nav li {
+        margin: 0px;
+        cursor: pointer;
+        font-size: 25px;
+        display: inline-flex;
+        width: 100px;
+        height: 30px;
+        margin-bottom: 0%;
+        transition: all 0.18s;
+        margin-right: 5px;
+      }
+      nav li:hover {
+        color: rgb(134, 0, 0);
+        font-size: 30px;
+        background-color: rgba(182, 182, 182, 0.18);
+        box-shadow: 8px 8px 60px 0 rgba(182, 182, 182, 0.8);
+      }
+      #eco {
+        display: inline-block;
+        height: 30px;
+        width: 30px;
+        right: 20px;
+        top: -8px;
+      }
+      @keyframes navAnimation {
+        0% {
+          color: rgba(255, 255, 255, 0.712);
+          font-style: normal;
+        }
+        25% {
+          color: rgba(194, 194, 255, 0.999);
+          font-style: italic;
+        }
+        50% {
+          color: rgba(126, 126, 247, 0.836);
+          font-style: normal;
+        }
+        75% {
+          color: rgba(194, 194, 255, 0.999);
+          font-style: italic;
+        }
+        100% {
+          color: rgba(255, 255, 255, 0.712);
+          font-style: normal;
+        }
+      }
+      #desvio {
+        animation: navAnimation 5s infinite ease-in-out;
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <ul>
+        <li class="title" id="desvio" style="font-family: cursive">Desvio</li>
+        <li class="space" style="width: 970px"></li>
+        <li id="home">Home</li>
+        <li>Profile</li>
+        <li
+          style="position: relative; width: 150px; color: rgb(255, 12, 12)"
+          id="eco-coins"
+        >
+          Eco-Coins<img
+            style="position: absolute"
+            id="eco"
+            src="eco-coin.png"
+          />
+        </li>
+      </ul>
+    </nav>
+
+    <div class="header" style="font-family: 'Times New Roman', Times, serif">
+      Eco-Coins: Aim towards green tourism
+    </div>
+
+    <!-- New Intro Section -->
+    <div class="intro-section">
+      <p>
+        <strong>Earn Evo Coins</strong> by participating in eco-friendly
+        activities such as cleaning beaches, parks, or other public spaces.
+        Upload an image of your work, and if you receive a certificate, upload
+        that too! By helping make the environment cleaner, you earn
+        <strong>Eco Coins</strong> that can be used to buy products on our
+        <strong>eco-friendly eCommerce platform</strong>.
+      </p>
+      <p>Join the movement and start earning Evo Coins today!</p>
+    </div>
+
+    <div class="content">
+      <div class="upload-box">
+        <h2>Upload Your Image</h2>
+
+        <!-- Form element for file upload -->
+        <form id="uploadForm" enctype="multipart/form-data">
+          <!-- Wallpaper input box -->
+          <div class="wallpaper-box">
+            <input type="text" placeholder="Enter Image or Certificate" />
+          </div>
+
+          <!-- File upload button -->
+          <label for="file-upload" class="custom-file-upload">
+            Choose File
+          </label>
+          <input
+            id="file-upload"
+            type="file"
+            name="file"
+            style="display: none"
+          />
+
+          <label
+            class="custom-file-upload"
+            style="margin-left: 20px"
+            onclick="uploadFile()"
+          >
+            Upload
+          </label>
+        </form>
+      </div>
+    </div>
+
+    <!-- Evo Coins Box -->
+    <div class="coins-box">
+      <div class="coin-container">
+        <div class="coin-symbol">
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/616/616489.png"
+            alt="Coin"
+          />
+          Eco Coins
+        </div>
+        <div class="coins-number">0</div>
+        <!-- Evo coins counter -->
+        <div class="coin"></div>
+      </div>
+    </div>
+
+    <div class="footer">&copy; 2024 Evocoins. All Rights Reserved.</div>
+    <script>
+      function uploadFile() {
+        const formData = new FormData(document.getElementById("uploadForm"));
+
+        fetch("http://localhost:3000/upload", {
+          method: "POST",
+          body: formData,
+        })
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Network response was not ok");
+            }
+            return response.json();
+          })
+          .then((data) => {
+            alert("Upload successful!");
+            console.log(data);
+          })
+          .catch((error) => {
+            alert("Upload failed!");
+            console.error("Error uploading file:", error);
+          });
+      }
+    </script>
+  </body>
+</html>

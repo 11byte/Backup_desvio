@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Desvio - Home</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Roboto", sans-serif;
+      }
+
+      body {
+        z-index: 15;
+        background: linear-gradient(135deg, #000814, #001d3d);
+        color: white;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 40px;
+        background-color: #274e963c;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        z-index: 1;
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+      }
+
+      .logo img {
+        height: 50px;
+        margin-right: 15px;
+        filter: drop-shadow(2px 4px 6px black);
+      }
+
+      .logo h1 {
+        font-size: 28px;
+        font-weight: bold;
+        position: relative;
+        background: linear-gradient(45deg, #f7c948, #ff4500);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        transition: color 0.3s ease, transform 0.3s ease;
+      }
+
+      .logo h1::before {
+        content: "Desvio";
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        color: #f7c948;
+        opacity: 0;
+        transition: opacity 0.3s ease, transform 0.3s ease;
+        transform: translateX(-5px);
+      }
+
+      .logo h1:hover {
+        transform: scale(1.05);
+      }
+
+      .logo h1:hover::before {
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+      nav ul {
+        list-style: none;
+        display: flex;
+      }
+
+      nav ul li {
+        margin-left: 20px;
+      }
+
+      nav ul li a {
+        color: white;
+        text-decoration: none;
+        font-size: 16px;
+        padding: 10px 20px;
+        border-radius: 5px;
+        transition: color 0.3s ease, background-color 0.3s ease;
+      }
+
+      .button {
+        background: linear-gradient(45deg, #6a5acd, #00bfff);
+        color: white;
+        border: none;
+        text-transform: uppercase;
+        font-weight: bold;
+        cursor: pointer;
+        transition: transform 0.3s ease, box-shadow 0.3s ease,
+          background 0.3s ease;
+        border-radius: 25px;
+        padding: 10px 20px;
+      }
+
+      .button:hover {
+        transform: scale(1.1);
+        box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+        background: linear-gradient(45deg, #063747, #301cb0);
+      }
+
+      nav ul li a:hover {
+        color: #0022ff;
+      }
+
+      main {
+        margin-top: 80px;
+        text-align: center;
+        padding: 100px 20px;
+        background-color: rgba(255, 255, 255, 0.05);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        border-radius: 20px;
+        margin: 50px auto;
+        width: 80%;
+        transition: box-shadow 0.3s;
+      }
+      main:hover {
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+        background-color: rgba(255, 255, 255, 0.05);
+      }
+
+      main h2 {
+        font-size: 36px;
+        margin-bottom: 20px;
+        background: linear-gradient(45deg, #f7b448, #ff4500);
+
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        transition: background-position 0.3s ease;
+        background-size: 200%;
+        background-position: right;
+        font-family: "Times New Roman", Times, serif;
+      }
+
+      main h2:hover {
+        background-position: left;
+      }
+
+      main p {
+        font-size: 18px;
+        font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+          "Lucida Sans", Arial, sans-serif;
+        color: #f7c948;
+        transition: color 0.3s ease;
+      }
+
+      main p:hover {
+        color: #1d32d2e6;
+      }
+
+      @media (max-width: 768px) {
+        header {
+          flex-direction: column;
+          text-align: center;
+        }
+
+        nav ul {
+          flex-direction: column;
+          margin-top: 20px;
+        }
+
+        nav ul li {
+          margin: 10px 0;
+        }
+
+        main {
+          width: 90%;
+          padding: 60px 10px;
+        }
+      }
+      .login {
+        padding-left: 10px;
+        z-index: 2000;
+        border-radius: 50px;
+        /* width: 350px;
+        height: 400px; */
+        width: 50px;
+        height: 50px;
+        background-color: #c2f0ff;
+        position: absolute;
+        right: 50px;
+        top: 80px;
+        opacity: 0.5;
+        font-size: 1px;
+      }
+      #username-input {
+        padding-left: 10px;
+        opacity: 1;
+        background-color: #00fff7;
+        height: 1px;
+        width: 1px;
+        display: inline-block;
+        font-family: Georgia;
+        font-weight: bold;
+      }
+      #pass-input {
+        padding-left: 10px;
+        border-radius: 5%;
+        opacity: 1;
+        background-color: #00fff7;
+        height: 1px;
+        width: 1px;
+        display: inline-block;
+        font-family: Georgia;
+      }
+      .logPane-btn {
+        cursor: pointer;
+        border-radius: 5%;
+        font-size: 1px;
+        display: inline-block;
+        margin-left: 20px;
+        height: 1px;
+        width: 1px;
+        /* height: 50px;
+        width: 80px; */
+        border-radius: 50px;
+        background-color: #063747;
+        color: aliceblue;
+      }
+      .logPane-btn :hover {
+        color: #9afffc;
+      }
+      .logPane-btn-reset {
+        font-size: 1px;
+        display: inline-block;
+        margin-left: 20px;
+        height: 1px;
+        width: 1px;
+        /* height: 50px;
+        width: 80px; */
+        border-radius: 50px;
+        background-color: #063747;
+        color: aliceblue;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="login">
+      <br /><br />
+      <br />
+      <p
+        style="
+          display: inline-block;
+          font-style: italic;
+          color: rgb(0, 7, 74);
+          font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
+            'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        "
+      >
+        Username:
+      </p>
+      <input id="username-input" />
+      <br /><br />
+      <p
+        style="
+          display: inline-block;
+          font-style: italic;
+          color: rgb(0, 7, 74);
+          font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
+            'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        "
+      >
+        Password:
+      </p>
+      <input id="pass-input" />
+      <br /><br />
+      <br />
+      <button class="logPane-btn">Login</button>
+      <button class="logPane-btn-reset">Register</button>
+    </div>
+
+    <header>
+      <div class="logo">
+        <img
+          src="desvio-logo-1.png"
+          alt="Desvio Logo"
+          style="
+            position: absolute;
+            width: 180px;
+            height: 180px;
+            left: -30px;
+            top: -20px;
+            padding-left: 0px;
+          "
+        />
+        <h1 style="margin-left: 100px">Desvio</h1>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="homepage.html">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#login" class="button" id="log">Log In</a></li>
+          <li>
+            <a href="registeration.html" target="_blank" class="button"
+              >Register</a
+            >
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <h2>Welcome to Desvio</h2>
+      <p>Plan your wonderful journey with us...</p>
+    </main>
+    <script>
+      var count = 0;
+      let login = document.querySelector(".login");
+      document.querySelector("#log").addEventListener("click", function () {
+        if (count == 0) {
+          login.style.transition = "all 0.3s";
+          login.style.width = "350px";
+          login.style.height = "400px";
+          count = 1;
+          login.style.fontSize = "30px";
+          document.querySelector("#username-input").style.width = "150px";
+          document.querySelector("#username-input").style.height = "30px";
+          document.querySelector("#username-input").style.borderRadius = "15%";
+          document.querySelector("#pass-input").style.width = "150px";
+          document.querySelector("#pass-input").style.height = "30px";
+          document.querySelector("#pass-input").style.borderRadius = "15%";
+
+          document.querySelector(".logPane-btn").style.height = "50px";
+          document.querySelector(".logPane-btn").style.width = "100px";
+          document.querySelector(".logPane-btn").style.fontSize = "20px";
+
+          document.querySelector(".logPane-btn-reset").style.height = "50px";
+          document.querySelector(".logPane-btn-reset").style.width = "100px";
+          document.querySelector(".logPane-btn-reset").style.fontSize = "20px";
+
+          //   login.input.width = "1500px";
+          //   login.input.height = "3000px";
+        } else {
+          login.style.transition = "all 0.3s";
+          login.style.width = "50px";
+          login.style.height = "50px";
+          count = 0;
+          login.style.fontSize = "1px";
+          document.querySelector("#username-input").style.width = "1px";
+          document.querySelector("#username-input").style.height = "1px";
+          document.querySelector("#pass-input").style.width = "1px";
+          document.querySelector("#pass-input").style.height = "1px";
+
+          document.querySelector(".logPane-btn").style.height = "1px";
+          document.querySelector(".logPane-btn").style.width = "1px";
+          document.querySelector(".logPane-btn").style.fontSize = "1px";
+
+          document.querySelector(".logPane-btn-reset").style.height = "1px";
+          document.querySelector(".logPane-btn-reset").style.width = "1px";
+          document.querySelector(".logPane-btn-reset").style.fontSize = "1px";
+        }
+      });
+      // const username = document.querySelector("#username-input").value;
+      // const password = document.querySelector("#pass-input").value;
+
+      document
+        .querySelector(".logPane-btn")
+        .addEventListener("click", function (e) {
+          e.preventDefault();
+          const username = document.getElementById("username-input").value;
+          const password = document.getElementById("pass-input").value;
+
+          if (username === "" || password === "") {
+            alert("Enter credentials !!!!!");
+            return;
+          }
+
+          // Prepare data to be sent to the server
+          const data = JSON.stringify({ username, password });
+
+          // Send credentials to the server for validation
+          fetch("http://localhost:3000/validate", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: data,
+          })
+            .then((response) => response.json())
+            .then((result) => {
+              if (result.success) {
+                console.log(result);
+                window.open("homepage.html", "_blank");
+
+                // Optionally redirect to another page or handle successful login
+              } else {
+                alert("Login UNsuccessful");
+              }
+            })
+            .catch((error) => {
+              console.log(error);
+              alert("Error connecting to server");
+            });
+        });
+    </script>
+  </body>
+</html>
